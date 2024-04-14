@@ -3,6 +3,7 @@ package BankManagementSystem;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
+import java.sql.ResultSet;
 
 public class Login extends JFrame implements ActionListener {
 
@@ -101,7 +102,24 @@ public class Login extends JFrame implements ActionListener {
             //setText() we will set the value
         }
         else if (ae.getSource() == login) {
+            Conn conn = new Conn();
+            String cardnumber = cardTextField.getText();    // getText() he is the return the cardnumber
+            String pinnumber = pinTextField.getText();       // getText() he is the return the pinnumber
+            String query = "select * from login where cardnumber = '"+cardnumber+"' and pin = '"+pinnumber+"' ";
 
+            try{
+               ResultSet rs = conn.s.executeQuery(query);     //query is retritiving data and returning so we use ResultSet class to store value
+                if(rs.next()){
+                    setVisible(false);                     // for close the login windown
+                    new Transactions().setVisible(true);   //and open the next windown(ATM dashboard windown) visible
+                }
+                else {
+                    JOptionPane.showMessageDialog(null, "Incorrect Card Number or Pin Number");
+                }
+            }
+            catch (Exception e){
+                System.out.println(e);
+            }
         }
         else if (ae.getSource() == signup) {
             setVisible(false);             //when user hits the signup
