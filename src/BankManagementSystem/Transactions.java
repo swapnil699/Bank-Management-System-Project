@@ -6,7 +6,10 @@ import java.awt.event.*;
 
 public class Transactions extends JFrame implements ActionListener {
     JButton deposit, withdrawl, fastcash, ministatement, pinchange, balanceequiry, exit;
-    Transactions(){
+    String pinnumber;
+
+    Transactions(String pinnumber) {
+        this.pinnumber = pinnumber;
         setLayout(null);
 
         //for image icon
@@ -76,13 +79,20 @@ public class Transactions extends JFrame implements ActionListener {
         setVisible(true);
     }
     public static void main(String args[]){
-        new Transactions();
+        new Transactions("");
     }
 
     @Override
     public void actionPerformed(ActionEvent ae) {
         if(ae.getSource() == exit){
             System.exit(0);
+        }
+        else if (ae.getSource() == deposit){
+            setVisible(false);
+            new Deposit(pinnumber).setVisible(true);
+        } else if (ae.getSource() == withdrawl) {
+            setVisible(false);
+            new Withdrawl(pinnumber).setVisible(true);
         }
     }
 }

@@ -212,6 +212,8 @@ public class SignupOne extends JFrame implements ActionListener{
             marrital = "Other";
         }
 
+
+
         String address = addressTextField.getText();
         String city = cityTextField.getText();
         String state = stateTextField.getText();
@@ -222,6 +224,12 @@ public class SignupOne extends JFrame implements ActionListener{
                 JOptionPane.showMessageDialog(null, "Name is Required");
             }
             else{
+
+                if(ae.getSource() == next){
+                    setVisible(false);
+                    new SignupThree(formno).setVisible(true);
+                }
+
                 Conn c = new Conn();
                 String query = "insert into signup values('"+formno+"', '"+name+"', '"+fname+"', '"+dob+"','"+gender+"','"+email+"','"+marrital+"','"+address+"','"+city+"','"+state+"','"+pin+"')";
                 c.s.executeUpdate(query);

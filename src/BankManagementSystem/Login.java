@@ -111,7 +111,7 @@ public class Login extends JFrame implements ActionListener {
                ResultSet rs = conn.s.executeQuery(query);     //query is retritiving data and returning so we use ResultSet class to store value
                 if(rs.next()){
                     setVisible(false);                     // for close the login windown
-                    new Transactions().setVisible(true);   //and open the next windown(ATM dashboard windown) visible
+                    new Transactions(pinnumber).setVisible(true);   //and open the next windown(ATM dashboard windown) visible
                 }
                 else {
                     JOptionPane.showMessageDialog(null, "Incorrect Card Number or Pin Number");
